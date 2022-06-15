@@ -64,7 +64,6 @@ function generateComments () {
     COMMENT_CONTENT.avatar = `img/avatar-${getRandomNumber(1,6)}.svg`;
     COMMENT_CONTENT.message = COMMENTS_TEXT[[getRandomNumber(0, COMMENTS_TEXT.length-1)]]; //как сделать так, чтобы было одно или несколько предложений?
     COMMENT_CONTENT.name =  NAMES[getRandomNumber(0, NAMES.length-1)];
-    
     COMMENTS.push(COMMENT_CONTENT);
   }
   return COMMENTS;
@@ -80,8 +79,7 @@ function generatePhotoDescription () {
     PHOTO_DESCRIPTION.url = `photos/${i}.jpg`;
     PHOTO_DESCRIPTION.description = DESCRIPIONS_TEXT[getRandomNumber(0, DESCRIPIONS_TEXT.length-1)];
     PHOTO_DESCRIPTION.likes = getRandomNumber (MIN_LIKES_NUMBER,MAX_LIKES_NUMBER);
-    PHOTO_DESCRIPTION.comments = getRandomArrayElement(); //как сделать так, чтобы был один или несколько комментов?
-    
+    PHOTO_DESCRIPTION.comments = getRandomCommentFromArray(); //как сделать так, чтобы был один или несколько комментов?
     GENERATED_PHOTO_DESCRIPTIONS.push(PHOTO_DESCRIPTION);
   }
   return GENERATED_PHOTO_DESCRIPTIONS;
