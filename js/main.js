@@ -1,17 +1,19 @@
-
+// 1
 function getRandomNumber (min, max) {
   if (min >= 0 && min < max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
   }
 }
 
+//  2
 function checkStringLength (myString, maxStringLength) {
   if (myString.length <= maxStringLength) {
     return true;
   }
   return false;
 }
-checkStringLength();
+checkStringLength ('1213,3');
+
 
 const COMMENTS_TEXT = [
   'Всё отлично!',
@@ -48,38 +50,42 @@ const DESCRIPIONS_TEXT = [
 
 const MIN_LIKES_NUMBER = 15;
 const MAX_LIKES_NUMBER = 200;
-const PHOTO_DESCRIPTIONS_NUMBER = 25;
+const PHOTO_OBJECTS_NUMBER = 25;
 const COMMENTS = [];
 
-function generateComment () {
-  for (let i = 1; i <= PHOTO_DESCRIPTIONS_NUMBER; i++) {
+function getRandomCommentFromArray ()  {
+  return COMMENTS[getRandomNumber(0, COMMENTS.length - 1)];
+}
+
+function generateComments () {
+  for (let i = 1; i <= PHOTO_OBJECTS_NUMBER; i++) {
     const COMMENT_CONTENT = {};
     COMMENT_CONTENT.id = i;
     COMMENT_CONTENT.avatar = `img/avatar-${getRandomNumber(1,6)}.svg`;
-    COMMENT_CONTENT.message = COMMENTS_TEXT[[getRandomNumber(0, COMMENTS_TEXT.length-1)]]; //Как сделать чтобы было одно или два предложения?
+    COMMENT_CONTENT.message = COMMENTS_TEXT[[getRandomNumber(0, COMMENTS_TEXT.length-1)]]; //как сделать так, чтобы было одно или несколько предложений?
     COMMENT_CONTENT.name =  NAMES[getRandomNumber(0, NAMES.length-1)];
+    
     COMMENTS.push(COMMENT_CONTENT);
   }
   return COMMENTS;
 }
-generateComment ();
+generateComments ();
 
-function getRandomArrayElement() {
-  return COMMENTS[getRandomNumber(0, COMMENTS.length - 1)];
-}
 
 function generatePhotoDescription () {
   const GENERATED_PHOTO_DESCRIPTIONS = [];
-  for (let i = 1; i <= PHOTO_DESCRIPTIONS_NUMBER; i++) {
+  for (let i = 1; i <= PHOTO_OBJECTS_NUMBER; i++) {
     const PHOTO_DESCRIPTION = {};
     PHOTO_DESCRIPTION.id = i;
     PHOTO_DESCRIPTION.url = `photos/${i}.jpg`;
     PHOTO_DESCRIPTION.description = DESCRIPIONS_TEXT[getRandomNumber(0, DESCRIPIONS_TEXT.length-1)];
     PHOTO_DESCRIPTION.likes = getRandomNumber (MIN_LIKES_NUMBER,MAX_LIKES_NUMBER);
-    PHOTO_DESCRIPTION.comments = getRandomArrayElement(); //Как сделать чтобы было разное число комментов?
+    PHOTO_DESCRIPTION.comments = getRandomArrayElement(); //как сделать так, чтобы был один или несколько комментов?
+    
     GENERATED_PHOTO_DESCRIPTIONS.push(PHOTO_DESCRIPTION);
   }
   return GENERATED_PHOTO_DESCRIPTIONS;
 }
 generatePhotoDescription ();
+
 
