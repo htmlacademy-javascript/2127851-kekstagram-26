@@ -1,19 +1,8 @@
-// 1
-function getRandomNumber (min, max) {
-  if (min >= 0 && min < max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-  }
-}
+const MIN_LIKES_NUMBER = 15;
 
-//  2
-function checkStringLength (myString, maxStringLength) {
-  if (myString.length <= maxStringLength) {
-    return true;
-  }
-  return false;
-}
-checkStringLength ('1213,3');
+const MAX_LIKES_NUMBER = 200;
 
+const PHOTO_OBJECTS_NUMBER = 25;
 
 const COMMENTS_TEXT = [
   'Всё отлично!',
@@ -48,27 +37,45 @@ const DESCRIPIONS_TEXT = [
   'Не судите строго',
 ];
 
-const MIN_LIKES_NUMBER = 15;
-const MAX_LIKES_NUMBER = 200;
-const PHOTO_OBJECTS_NUMBER = 25;
-const COMMENTS = [];
+function getRandomNumber (min, max) {
+  if (min >= 0 && min < max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+}
 
-function getRandomCommentFromArray ()  {
-  return COMMENTS[getRandomNumber(0, COMMENTS.length - 1)];
+function checkStringLength (myString, maxStringLength) {
+  if (myString.length <= maxStringLength) {
+    return true;
+  }
+  return false;
+}
+checkStringLength(78, 589);
+
+function getMessage () {
+  let message = '';
+  for (let i = 1; i <= getRandomNumber(1, 3); i++) {
+    message += `${COMMENTS_TEXT[getRandomNumber(0, COMMENTS_TEXT.length-1)]  } `;
+  }
+  return message.trim();
+}
+getMessage ();
+
+function getRandomCommentFromArray (comments)  {
+  return comments[getRandomNumber(0, comments.length - 1)];
 }
 
 function generateComments () {
+  const COMMENTS = [];
   for (let i = 1; i <= PHOTO_OBJECTS_NUMBER; i++) {
     const COMMENT_CONTENT = {};
     COMMENT_CONTENT.id = i;
     COMMENT_CONTENT.avatar = `img/avatar-${getRandomNumber(1,6)}.svg`;
-    COMMENT_CONTENT.message = COMMENTS_TEXT[[getRandomNumber(0, COMMENTS_TEXT.length-1)]]; //как сделать так, чтобы было одно или несколько предложений?
+    COMMENT_CONTENT.message = getMessage ();
     COMMENT_CONTENT.name =  NAMES[getRandomNumber(0, NAMES.length-1)];
     COMMENTS.push(COMMENT_CONTENT);
   }
   return COMMENTS;
 }
-generateComments ();
 
 
 function generatePhotoDescription () {
@@ -79,11 +86,12 @@ function generatePhotoDescription () {
     PHOTO_DESCRIPTION.url = `photos/${i}.jpg`;
     PHOTO_DESCRIPTION.description = DESCRIPIONS_TEXT[getRandomNumber(0, DESCRIPIONS_TEXT.length-1)];
     PHOTO_DESCRIPTION.likes = getRandomNumber (MIN_LIKES_NUMBER,MAX_LIKES_NUMBER);
-    PHOTO_DESCRIPTION.comments = getRandomCommentFromArray(); //как сделать так, чтобы был один или несколько комментов?
+    PHOTO_DESCRIPTION.comments = [];
+    for (let j = 1; j <= getRandomNumber(1, 3); j++) {
+      PHOTO_DESCRIPTION.comments.push(getRandomCommentFromArray(generateComments()));
+    }
     GENERATED_PHOTO_DESCRIPTIONS.push(PHOTO_DESCRIPTION);
   }
   return GENERATED_PHOTO_DESCRIPTIONS;
 }
 generatePhotoDescription ();
-
-
