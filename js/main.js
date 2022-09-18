@@ -1,2 +1,2 @@
-import {generatePhotoDescription} from './data.js';
-generatePhotoDescription();
+import { generateDescriptionsObjects } from "./util.js";
+generateDescriptionsObjects();
