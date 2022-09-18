@@ -1,12 +1,12 @@
-import { MESSAGES, NAMES, DESCRIPTIONS } from "./data.js";
+import { MESSAGES, NAMES, DESCRIPTIONS } from './data.js';
 
 const generateMessage = function () {
   const random = getRandomPositiveInteger(1, 2);
   return random === 1
     ? MESSAGES[getRandomPositiveInteger(0, 5)]
     : `${MESSAGES[getRandomPositiveInteger(0, 5)]} ${
-        MESSAGES[getRandomPositiveInteger(0, 5)]
-      }`;
+      MESSAGES[getRandomPositiveInteger(0, 5)]
+    }`;
 };
 generateMessage();
 
@@ -45,7 +45,7 @@ const generateDescriptionsObjects = function () {
       comments: generateComments(),
     });
   }
-  return console.log(DESCRIPTIONS_OBJECTS);
+  return DESCRIPTIONS_OBJECTS;
 };
 
 export { generateDescriptionsObjects };

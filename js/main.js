@@ -1,2 +1,2 @@
-import { generateDescriptionsObjects } from "./util.js";
+import { generateDescriptionsObjects } from './util.js';
 generateDescriptionsObjects();
